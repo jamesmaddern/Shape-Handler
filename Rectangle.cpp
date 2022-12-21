@@ -3,10 +3,10 @@
 Rectangle::Rectangle(float x, float y, float h, float w) {
 	height = h;
 	width = w;
-	Point lT(x, y);
+	leftTop = Point(x, y);
 	calculateArea();
 	calculatePerimeter();
-	calculatePoints(&lT);
+	calculatePoints();
 }
 
 
@@ -19,14 +19,13 @@ float Rectangle::calculatePerimeter() {
 	perimeter = (width + height) * 2;
 	return 0;
 }
-float Rectangle::calculatePoints(Point* p0) {
+float Rectangle::calculatePoints() {
 	Point* p1,* p2,* p3;
-	Point temp;
-	points.push_back(p0);
-	temp = *p0;
-	p1 = new Point((temp.getX() + width), temp.getY());
-	p2 = new Point((temp.getX() + width), (temp.getY() - height));
-	p3 = new Point(temp.getX(), (temp.getY() - height));
+	
+	points.push_back(&leftTop);
+	p1 = new Point((leftTop.getX() + width), leftTop.getY());
+	p2 = new Point((leftTop.getX() + width), (leftTop.getY() + height));
+	p3 = new Point(leftTop .getX(), (leftTop.getY() + height));
 
 	points.push_back(p1);
 	points.push_back(p2);

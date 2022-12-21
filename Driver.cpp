@@ -129,6 +129,8 @@ int main()
 		// do any necessary postprocessing at the end of each loop...
 		// yes, there is some necessary postprocessing...
 		cout << endl << endl;
+		
+		parameters.clear();
 	}
 
 	cout << "Press any key to continue...";

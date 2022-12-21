@@ -10,7 +10,7 @@ public:
 	Rectangle(float x, float y, float h, float w);
 	float calculateArea();
 	float calculatePerimeter();
-	float calculatePoints(Point* lt);
+	float calculatePoints();
 	void move();
 	void scale();
 	std::string toString();

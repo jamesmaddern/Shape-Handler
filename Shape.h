@@ -12,9 +12,9 @@ protected:
 	std::vector<Point*> points;
 public:
 	Shape();
-	float calculateArea();
-	float calculatePerimeter();
-	float calculatePoints();
+	void calculateArea(int, int);
+	void calculatePerimeter(int, int);
+	void calculatePoints(int, int);
 	std::string toString();
 };
 

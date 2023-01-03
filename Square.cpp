@@ -7,6 +7,17 @@ Square::Square(float x, float y, float e) {
 	calculatePerimeter(e, e);
 	calculatePoints(e, e);
 }
+void Square::move(int x, int y) {
+	leftTop = Point(x, y);
+	updateShape(edge, edge);
+}
+void Square::scale(float scaleX, float scaleY) {
+	edge = edge * scaleX;
+	
+	updateShape(edge, edge);
+}
+
+
 std::string Square::toString() {
 	std::string str;
 

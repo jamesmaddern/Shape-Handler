@@ -2,17 +2,18 @@
 class Point
 {
 private:
-	int _x;
-	int _y;
+	float _x;
+	float _y;
 public:
-	Point() {};
+	Point() {
+		_x = 0;
+		_y = 0;
+	};
 	Point(int x, int y) {
 		_x = x;
 		_y = y;
 	};
 	int getX();
 	int getY();
-	void setX(int);
-	void setY(int);
 };
 

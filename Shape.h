@@ -11,10 +11,12 @@ protected:
 	float perimeter;
 	std::vector<Point*> points;
 public:
+
 	Shape();
-	void calculateArea(int, int);
-	void calculatePerimeter(int, int);
-	void calculatePoints(int, int);
-	std::string toString();
+	void updateShape(float,float);
+	virtual void calculateArea(float, float);
+	virtual void calculatePerimeter(float, float);
+	void calculatePoints(float, float);
+	virtual std::string toString() = 0;
 };
 

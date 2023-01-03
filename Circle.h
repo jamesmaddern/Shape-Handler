@@ -1,18 +1,19 @@
 #pragma once
+#include "Movable.h"
 #include "Shape.h"
 class Circle :
-    public Shape
+    public Shape, public Movable
 {
 private:
 	const double pi = 3.14159265358979323846;
     float radius;
 public:
 	Circle(float x, float y, float r);
-	void calculateArea();
-	void calculatePerimeter();
+	void calculateArea(float,float);
+	void calculatePerimeter(float,float);
 	
-	void move();
-	void scale();
+	void move(int, int);
+	void scale(float, float);
 	std::string toString();
 };
 

@@ -4,13 +4,19 @@ Rectangle::Rectangle(float x, float y, float h, float w) {
 	height = h;
 	width = w;
 	leftTop = Point(x, y);
-	calculateArea(height, width);
-	calculatePerimeter(height,width);
-	calculatePoints(width, height);
+	updateShape(width, height);
 }
 
 
-
+void Rectangle::move(int x, int y) {
+	leftTop = Point(x, y);
+	updateShape(width,height);
+}
+void Rectangle::scale(float scaleX, float scaleY) {
+	width = width * scaleX;
+	height = height * scaleY;
+	updateShape(width, height);
+}
 
 std::string Rectangle::toString() {
 	std::string str;

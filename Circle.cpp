@@ -3,20 +3,26 @@ Circle::Circle(float x, float y, float r) {
 	radius = r;
 	leftTop = Point(x, y);
 	isCircular = true;
-	calculateArea();
-	calculatePerimeter();
-	calculatePoints(radius * 2, r * 2);
+	updateShape(radius*2,radius*2);
+	
 
 }
 
-void Circle::calculateArea() {
+void Circle::calculateArea(float w, float h) {
 	area = pi * radius * radius;
 }
-void Circle::calculatePerimeter()
+void Circle::calculatePerimeter(float w, float h)
 {
 	perimeter = 2 * pi * radius;
 }
-
+void Circle::move(int x, int y) {
+	leftTop = Point(x, y);
+	updateShape(radius*2, radius*2);
+}
+void Circle::scale(float scaleR, float) {
+	radius = radius * scaleR;
+	updateShape(radius*2, radius*2);
+}
 std::string Circle::toString() {
 	std::string str;
 

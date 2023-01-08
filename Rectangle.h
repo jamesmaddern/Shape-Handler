@@ -1,6 +1,7 @@
 #pragma once
 #include "Shape.h"
 #include "Movable.h"
+#include <iostream>
 class Rectangle :
     public Shape, public Movable
 {
@@ -12,5 +13,7 @@ public:
     void scale(float,float);
 	Rectangle(float x, float y, float h, float w);	
 	std::string toString();
+    void Print() const;
+    
 };
 

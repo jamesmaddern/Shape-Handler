@@ -1,5 +1,5 @@
 #include "Rectangle.h"
-
+#include <iostream>
 Rectangle::Rectangle(float x, float y, float h, float w) {
 	height = h;
 	width = w;
@@ -35,4 +35,7 @@ std::string Rectangle::toString() {
 
 
 	return str;
+}
+void Rectangle::Print() const {
+	std::cout << "test" << std::endl;
 }

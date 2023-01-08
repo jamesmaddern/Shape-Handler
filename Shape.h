@@ -19,5 +19,7 @@ public:
 	virtual void calculatePerimeter(float, float);
 	void calculatePoints(float, float);
 	virtual std::string toString() = 0;
+	//+virtual void Print();
+
 };
 

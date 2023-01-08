@@ -27,7 +27,26 @@ GOOD LUCK!
 #include <vector>
 #include <iomanip>
 using namespace std;
-
+ostream& operator <<(ostream& out, const Shape& obj) {
+	out << "hello";
+	return out;
+}
+bool isNumber(const string& s)
+{
+	for (char const& ch : s) {
+		if (std::isdigit(ch) == 0) {
+			return false;
+		}
+	}
+	return true;
+}
+void checkArgs(int errorCode, const vector<string>& p) {
+	for (int i = 1; i < p.size(); i++) {
+		if (!isNumber(p[i])) {
+			throw errorCode;
+		}
+	}
+}
 int main()
 {
 	string userCommand;
@@ -74,6 +93,8 @@ int main()
 				if(parameters.size() != 5){
 					throw 1;
 				}
+				checkArgs(1,parameters);
+
 				int x = std::stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
 				int y = std::stoi(parameters[2].c_str());
 				int h = std::stoi(parameters[3].c_str());
@@ -92,6 +113,7 @@ int main()
 					if (parameters.size() != 4) {
 						throw 2;
 					}
+					checkArgs(2, parameters);
 					// get parameters
 					// ...
 					int x = std::stoi(parameters[1].c_str());
@@ -109,6 +131,7 @@ int main()
 				if (parameters.size() != 4) {
 					throw 3;
 				}
+				checkArgs(3, parameters);
 				int x = std::stoi(parameters[1].c_str());
 				int y = std::stoi(parameters[2].c_str());
 				int r = std::stoi(parameters[3].c_str());
@@ -124,6 +147,8 @@ int main()
 				if (shapes.empty()) {
 					throw 7;
 				}
+				checkArgs(4, parameters);
+
 				// scale object at index... the scaling needs to be isotropic in case of circle and square 
 				// you may want to check if the index exists or not!
 				int shapeNo = std::stoi(parameters[1].c_str()); // read from parameters
@@ -144,6 +169,7 @@ int main()
 				if (shapes.empty()) {
 					throw 7;
 				}
+				checkArgs(5, parameters);
 				// move object at index 
 				int shapeNo = std::stoi(parameters[1].c_str()); // read from parameters
 				int x = std::stoi(parameters[2].c_str());
@@ -153,7 +179,10 @@ int main()
 				// Study the following code. A Shape object is not Movable, but all derived classes are...
 				// you can't automatically type cast from a Shape to a Movable, but you can force a downcasting
 				Movable *m = dynamic_cast<Movable*>(shapes[shapeNo - 1]);
-				m->move(x, y);
+				for (int i = 0; i < 100; i++) {
+					m->move(x, y);
+
+				}
 				// scale should work similarly...
 
 				// note that here you should see the corresponding toString output for the derived classes...
@@ -167,8 +196,12 @@ int main()
 					throw 6;
 				}
 				if (shapes.empty()) { throw 7; }
+				checkArgs(6, parameters);
+				Rectangle* r = new Rectangle(10, 10, 10, 10);
+				cout << r << endl;
+				
 				// this is not given in our example, but why don't you implement a display function which shows all objects stored in shapes?
-				if (parameters.size() == 1) {
+				/*if (parameters.size() == 1) {
 					for (int i = 0; i < shapes.size(); i++) {
 						cout << setprecision(1) <<shapes.at(i)->toString();
 					}
@@ -179,7 +212,7 @@ int main()
 					}
 					int shapeNo = std::stoi(parameters[1].c_str());
 					cout << shapes.at(shapeNo-1)->toString();
-				}
+				}*/
 				
 
 
@@ -196,7 +229,12 @@ int main()
 			else if(command.compare("exit")!=0) {
 				throw 0;
 			}
+			
+			
+		
 			parameters.clear();
+			
+			
 			// do any necessary postprocessing at the end of each loop...
 			// yes, there is some necessary postprocessing...
 			cout << endl << endl;

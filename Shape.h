@@ -5,13 +5,14 @@
 class Shape
 {
 protected:
+	
 	float area;
 	bool isCircular;
 	Point leftTop;
 	float perimeter;
 	std::vector<Point*> points;
 public:
-
+	virtual ~Shape();
 	Shape();
 	void updateShape(float,float);
 	virtual void calculateArea(float, float);

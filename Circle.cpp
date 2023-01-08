@@ -25,15 +25,15 @@ void Circle::scale(float scaleR, float) {
 }
 std::string Circle::toString() {
 	std::string str;
-
-	str += "Circumference = " + std::to_string(perimeter) +
-		"\nArea = " + std::to_string(area) +
-		"\nPoints = ";
+	str += "\t-----CIRCLE-----\n";
+	str += "Circumference = \t" + std::to_string(perimeter) +
+		"\nArea = \t\t\t" + std::to_string(area) +
+		"\nPoints =";
 	for (int i = 0; i < points.size(); i++) {
 		Point p = *points.at(i);
 
-		str += "Point " + std::to_string(i + 1) + ": " +
-			std::to_string(p.getX()) + ", " + std::to_string(p.getY()) + " ";
+		str += "\t\tPoint " + std::to_string(i + 1) + ": [" +
+			std::to_string(p.getX()) + ", " + std::to_string(p.getY()) + "]\n\t ";
 	}
 	str += "\n";
 

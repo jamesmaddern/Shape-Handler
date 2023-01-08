@@ -2,7 +2,11 @@
 #include <iostream>
 Shape::Shape(){
 	isCircular = false;
+	
 };
+Shape::~Shape() {
+	//std::cout << "Shape deleted";
+}
 void Shape::updateShape(float w,float h) {
 	this->calculateArea(w,h);
 	this->calculatePerimeter(w,h);

@@ -19,16 +19,17 @@ void Rectangle::scale(float scaleX, float scaleY) {
 }
 
 std::string Rectangle::toString() {
+	
 	std::string str;
-
-	str += "Perimeter = " + std::to_string(perimeter) + 
-		"\nArea = " + std::to_string(area) + 
-		"\nPoints = ";
+	str += "\t-----Rectangle-----\n";
+	str += "Perimeter = \t" + std::to_string(perimeter) +
+		"\nArea = \t\t\t" + std::to_string(area) +
+		"\nPoints =";
 	for (int i = 0; i < points.size(); i++) {
 		Point p = *points.at(i);
-		
-		str += "Point " + std::to_string(i+1) + ": " + 
-			std::to_string(p.getX()) + ", " + std::to_string(p.getY()) + " ";
+
+		str += "\t\tPoint " + std::to_string(i + 1) + ": [" +
+			std::to_string(p.getX()) + ", " + std::to_string(p.getY()) + "]\n\t ";
 	}
 	str += "\n";
 

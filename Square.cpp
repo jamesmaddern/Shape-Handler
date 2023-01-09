@@ -1,5 +1,6 @@
 #include "Square.h"
-
+#include <math.h>
+#include<iostream>
 Square::Square(float x, float y, float e) {
 	edge = e;
 	leftTop = Point(x, y);
@@ -7,20 +8,31 @@ Square::Square(float x, float y, float e) {
 	calculatePerimeter(e, e);
 	calculatePoints(e, e);
 }
-std::string Square::toString() {
-	std::string str;
 
-	str += "Perimeter = " + std::to_string(perimeter) +
-		"\nArea = " + std::to_string(area) +
-		"\nPoints = ";
+void Square::move(int x, int y) {
+	leftTop = Point(x, y);
+	updateShape(edge, edge);
+}
+void Square::scale(float scaleX, float scaleY) {
+	edge = edge * scaleX;
+	
+	updateShape(edge, edge);
+}
+
+
+std::ostream& Square::toString(std::ostream& out) {
+	out << "\t-----Square-----\n"
+		<< "Perimeter = \t" << perimeter
+		<< "\nArea = \t\t\t" << area <<
+		"\nPoints =";
 	for (int i = 0; i < points.size(); i++) {
 		Point p = *points.at(i);
 
-		str += "Point " + std::to_string(i + 1) + ": " +
-			std::to_string(p.getX()) + ", " + std::to_string(p.getY()) + " ";
+		out << "\t\tPoint " << std::to_string(i + 1) << ": [" <<
+			std::to_string(p.getX()) << ", " << std::to_string(p.getY()) << "]\n\t ";
 	}
-	str += "\n";
+	out << "\n";
 
 
-	return str;
+	return out;
 }

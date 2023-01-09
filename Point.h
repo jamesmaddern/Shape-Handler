@@ -1,18 +1,23 @@
 #pragma once
+#include <iostream>
 class Point
 {
 private:
-	int _x;
-	int _y;
+	float _x;
+	float _y;
 public:
-	Point() {};
-	Point(int x, int y) {
+	~Point() {
+		//std::cout << "Point Destroyed";
+	}
+	Point() {
+		_x = 0;
+		_y = 0;
+	};
+	Point(float x, float y) {
 		_x = x;
 		_y = y;
 	};
 	int getX();
 	int getY();
-	void setX(int);
-	void setY(int);
 };
 

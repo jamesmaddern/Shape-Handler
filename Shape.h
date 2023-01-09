@@ -2,6 +2,7 @@
 #include <vector>
 #include "Point.h"
 #include <string>
+#include <iostream>
 class Shape
 {
 protected:
@@ -18,8 +19,10 @@ public:
 	virtual void calculateArea(float, float);
 	virtual void calculatePerimeter(float, float);
 	void calculatePoints(float, float);
-	virtual std::string toString() = 0;
-	//+virtual void Print();
+
+	virtual std::ostream& toString(std::ostream&) = 0;
+	friend std::ostream& operator<<(std::ostream&, Shape& obj);
+
 
 };
 

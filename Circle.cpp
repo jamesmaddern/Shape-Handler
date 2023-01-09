@@ -1,4 +1,5 @@
 #include "Circle.h"
+#include <iostream>
 Circle::Circle(float x, float y, float r) {
 	radius = r;
 	leftTop = Point(x, y);
@@ -23,20 +24,23 @@ void Circle::scale(float scaleR, float) {
 	radius = radius * scaleR;
 	updateShape(radius*2, radius*2);
 }
-std::string Circle::toString() {
-	std::string str;
-	str += "\t-----CIRCLE-----\n";
-	str += "Circumference = \t" + std::to_string(perimeter) +
-		"\nArea = \t\t\t" + std::to_string(area) +
+std::ostream& Circle::toString(std::ostream& out) {
+	
+	out << "\t-----CIRCLE-----\n"
+	<< "Circumference = \t" << perimeter <<
+		"\nArea = \t\t\t" << area <<
 		"\nPoints =";
 	for (int i = 0; i < points.size(); i++) {
 		Point p = *points.at(i);
 
-		str += "\t\tPoint " + std::to_string(i + 1) + ": [" +
-			std::to_string(p.getX()) + ", " + std::to_string(p.getY()) + "]\n\t ";
+		out << "\t\tPoint " << std::to_string(i + 1) << ": [" <<
+			std::to_string(p.getX()) << ", " << std::to_string(p.getY()) << "]\n\t ";
 	}
-	str += "\n";
+	out << "\n";
 
 
-	return str;
+	return out;
 }
+//std::ostream& operator<<(std::ostream& out, Shape& obj) {
+//	return obj.toString(out);
+//}

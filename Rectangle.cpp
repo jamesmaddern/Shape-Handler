@@ -1,5 +1,6 @@
 #include "Rectangle.h"
 #include <iostream>
+
 Rectangle::Rectangle(float x, float y, float h, float w) {
 	height = h;
 	width = w;
@@ -18,24 +19,23 @@ void Rectangle::scale(float scaleX, float scaleY) {
 	updateShape(width, height);
 }
 
-std::string Rectangle::toString() {
+std::ostream& Rectangle::toString(std::ostream& out) {
 	
-	std::string str;
-	str += "\t-----Rectangle-----\n";
-	str += "Perimeter = \t" + std::to_string(perimeter) +
-		"\nArea = \t\t\t" + std::to_string(area) +
+	
+	out << "\t-----Rectangle-----\n"
+		<< "Perimeter = \t" << perimeter
+		<< "\nArea = \t\t\t" << area <<
 		"\nPoints =";
 	for (int i = 0; i < points.size(); i++) {
 		Point p = *points.at(i);
 
-		str += "\t\tPoint " + std::to_string(i + 1) + ": [" +
-			std::to_string(p.getX()) + ", " + std::to_string(p.getY()) + "]\n\t ";
+		out << "\t\tPoint " << std::to_string(i + 1) << ": [" <<
+			std::to_string(p.getX()) << ", " << std::to_string(p.getY()) << "]\n\t ";
 	}
-	str += "\n";
+	out << "\n";
 
 
-	return str;
+	return out;
 }
-void Rectangle::Print() const {
-	std::cout << "test" << std::endl;
-}
+
+

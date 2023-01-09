@@ -13,7 +13,7 @@ public:
 		_x = 0;
 		_y = 0;
 	};
-	Point(int x, int y) {
+	Point(float x, float y) {
 		_x = x;
 		_y = y;
 	};

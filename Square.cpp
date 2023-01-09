@@ -22,21 +22,19 @@ void Square::scale(float scaleX, float scaleY) {
 }
 
 
-std::string Square::toString() {
-	std::string str;
-	float temp = roundf((perimeter * 100) / 100);
-	str += "\t-----Square-----\n";
-	str += "Perimeter = \t" + std::to_string(temp) +
-		"\nArea = \t\t\t" + std::to_string(area) +
+std::ostream& Square::toString(std::ostream& out) {
+	out << "\t-----Square-----\n"
+		<< "Perimeter = \t" << perimeter
+		<< "\nArea = \t\t\t" << area <<
 		"\nPoints =";
 	for (int i = 0; i < points.size(); i++) {
 		Point p = *points.at(i);
 
-		str += "\t\tPoint " + std::to_string(i + 1) + ": [" +
-			std::to_string(p.getX()) + ", " + std::to_string(p.getY()) + "]\n\t ";
+		out << "\t\tPoint " << std::to_string(i + 1) << ": [" <<
+			std::to_string(p.getX()) << ", " << std::to_string(p.getY()) << "]\n\t ";
 	}
-	str += "\n";
+	out << "\n";
 
 
-	return str;
+	return out;
 }

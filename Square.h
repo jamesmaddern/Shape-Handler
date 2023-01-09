@@ -13,6 +13,6 @@ public:
 	
 	void move(int, int);
 	void scale(float,float);
-	std::string toString();
+	std::ostream& toString(std::ostream&);
 };
 

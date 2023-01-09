@@ -27,14 +27,11 @@ GOOD LUCK!
 #include <vector>
 #include <iomanip>
 using namespace std;
-ostream& operator <<(ostream& out, const Shape& obj) {
-	out << "hello";
-	return out;
-}
+
 bool isNumber(const string& s)
 {
 	for (char const& ch : s) {
-		if (std::isdigit(ch) == 0) {
+		if (std::isdigit(ch) == 0 && ch != '.') {
 			return false;
 		}
 	}
@@ -59,7 +56,7 @@ int main()
 		try 
 		{
 
-			cout << "Enter the command: ";
+			cout << setprecision(5) << "Enter the command: ";
 		
 			getline(cin, userCommand);
 			cout << endl;
@@ -103,12 +100,13 @@ int main()
 
 				Rectangle* r = new Rectangle(x, y, h, w);
 				shapes.push_back(r);
-				cout << r->toString();/* instead of this, you may implement operator overloadig and 
+				cout << *r << endl;/* instead of this, you may implement operator overloadig and
 										use cout << r which will give you additional points */
 			
 			}
-			else if (command.compare("addS") == 0) {
+			else if (command.compare("addS") == 0) {				
 				for (int i = 0; i < 200; i++) {
+
 
 					if (parameters.size() != 4) {
 						throw 2;
@@ -121,8 +119,9 @@ int main()
 					int e = std::stoi(parameters[3].c_str());
 					Square* s = new Square(x, y, e);
 					shapes.push_back(s);
-					cout << s->toString();
+					cout << *s << endl;
 				}
+				
 			}
 
 			else if (command.compare("addC") == 0) {
@@ -137,7 +136,7 @@ int main()
 				int r = std::stoi(parameters[3].c_str());
 				Circle* c = new Circle(x, y, r);
 				shapes.push_back(c);
-				cout << c->toString();
+				cout << *c << endl;
 			
 			}
 			else if (command.compare("scale") == 0) {
@@ -160,7 +159,7 @@ int main()
 				Movable* m = dynamic_cast<Movable*>(shapes[shapeNo - 1]);
 				m->scale(scaleX, scaleY);
 
-				cout << shapes[shapeNo - 1]->toString();
+				cout << *shapes[shapeNo - 1] << endl;
 			}
 			else if (command.compare("move") == 0) {
 				if (parameters.size() != 4) {
@@ -188,7 +187,7 @@ int main()
 				// note that here you should see the corresponding toString output for the derived classes...
 				// if toString is not a virtual function, you may see the base class functionality :(
 			
-				cout << shapes[shapeNo - 1]->toString();
+				cout << *shapes[shapeNo - 1] << endl;
 			}
 			else if (command.compare("display") == 0) {
 				
@@ -198,7 +197,7 @@ int main()
 				if (shapes.empty()) { throw 7; }
 				checkArgs(6, parameters);
 				Rectangle* r = new Rectangle(10, 10, 10, 10);
-				cout << r << endl;
+				cout << *r << endl;
 				
 				// this is not given in our example, but why don't you implement a display function which shows all objects stored in shapes?
 				/*if (parameters.size() == 1) {
@@ -251,7 +250,8 @@ int main()
 					"\n\tAdd Circle: \t addC xPosition yPosition Radius" <<
 					"\n\tMove Shape: \t move shapeIndex newXPosition newYPosition" <<
 					"\n\tScale Shape: \t scale shapeIndex scaleX scaleY" <<
-					"\n\tDisplay Shapes: \tdisplay [shapeIndex]";
+					"\n\tDisplay Shapes: \tdisplay [shapeIndex]" <<
+					"\n\tClear Shapes: \tclear";
 				break;
 			case 1:
 				cout << "Invalid Argument List:\n\tAdd Rectangle:\t addR xPosition yPosition Height Width";

@@ -5,7 +5,7 @@ Shape::Shape(){
 	
 };
 Shape::~Shape() {
-	//std::cout << "Shape deleted";
+	
 }
 void Shape::updateShape(float w,float h) {
 	this->calculateArea(w,h);
@@ -28,13 +28,19 @@ void Shape::calculatePoints(float width,float height) {
 	if (!this->isCircular) { 
 		p1 = new Point((leftTop.getX() + width), leftTop.getY());
 		points.push_back(p1);
+		
 	}
 	p2 = new Point((leftTop.getX() + width), (leftTop.getY() + height));
 	points.push_back(p2);
 	if (!this->isCircular) { 
 		p3 = new Point(leftTop.getX(), (leftTop.getY() + height)); 
 		points.push_back(p3);
+		
 	}
 	
+	
 
+}
+std::ostream& operator<<(std::ostream& out, Shape& obj) {
+	return obj.toString(out);	
 }

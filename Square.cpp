@@ -8,9 +8,7 @@ Square::Square(float x, float y, float e) {
 	calculatePerimeter(e, e);
 	calculatePoints(e, e);
 }
-Square::~Square() {
-	std::cout << "Square Deleted";
-}
+
 void Square::move(int x, int y) {
 	leftTop = Point(x, y);
 	updateShape(edge, edge);

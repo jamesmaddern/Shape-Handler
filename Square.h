@@ -8,7 +8,7 @@ private:
 
     float edge;
 public:
-	~Square();
+	
 	Square(float x, float y, float e);
 	
 	void move(int, int);

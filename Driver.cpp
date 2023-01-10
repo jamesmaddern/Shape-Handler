@@ -90,43 +90,43 @@ int main()
 				// The following four lines have a type mismatch error
 				// note that the the parameters vector contains ascii values
 				// HINT: stoi function converts from string to int
-				for (int i = 0; i < 500; i++) {
+				
 
-					if(parameters.size() != 5){
-						throw 1;
-					}
-					checkArgs(1,parameters);
-
-					int x = std::stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
-					int y = std::stoi(parameters[2].c_str());
-					int h = std::stoi(parameters[3].c_str());
-					int w = std::stoi(parameters[4].c_str());
-
-
-					Rectangle* r = new Rectangle(x, y, h, w);
-					shapes.push_back(r);
-					std::cout << *r << endl;
+				if(parameters.size() != 5){
+					throw 1;
 				}
+				checkArgs(1,parameters);
+
+				int x = std::stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
+				int y = std::stoi(parameters[2].c_str());
+				int h = std::stoi(parameters[3].c_str());
+				int w = std::stoi(parameters[4].c_str());
+
+
+				Rectangle* r = new Rectangle(x, y, h, w);
+				shapes.push_back(r);
+				std::cout << *r << endl;
+				
 										
 			
 			}
 			else if (command.compare("addS") == 0) {				
-				for (int i = 0; i < 200; i++) {
+				
 
 
-					if (parameters.size() != 4) {
-						throw 2;
-					}
-					checkArgs(2, parameters);
-					// get parameters
-					// ...
-					int x = std::stoi(parameters[1].c_str());
-					int y = std::stoi(parameters[2].c_str());
-					int e = std::stoi(parameters[3].c_str());
-					Square* s = new Square(x, y, e);
-					shapes.push_back(s);
-					std::cout << *s << endl;
+				if (parameters.size() != 4) {
+					throw 2;
 				}
+				checkArgs(2, parameters);
+				// get parameters
+				// ...
+				int x = std::stoi(parameters[1].c_str());
+				int y = std::stoi(parameters[2].c_str());
+				int e = std::stoi(parameters[3].c_str());
+				Square* s = new Square(x, y, e);
+				shapes.push_back(s);
+				std::cout << *s << endl;
+				
 				
 			}
 
@@ -215,11 +215,11 @@ int main()
 					transform(shapes.begin(), shapes.end(), shapes.begin(),[](Shape* s) {std::cout << *s << endl;return s;});					
 				}
 				else {
-					if (stoi(parameters[1]) > shapes.size()) {
+					if (stoi(parameters[1]) > shapes.size() || stoi(parameters[1]) <= 0) {
 						throw 6;
 					}
 					int shapeNo = std::stoi(parameters[1].c_str());
-					std::cout << shapes.at(shapeNo - 1) << endl;
+					std::cout << *shapes.at(shapeNo - 1) << endl;
 				}
 			}
 			else if (command.compare("clear") == 0) {

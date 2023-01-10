@@ -26,6 +26,9 @@ GOOD LUCK!
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
+
+
 using namespace std;
 
 bool isNumber(const string& s)
@@ -50,16 +53,16 @@ int main()
 	vector <Shape*> shapes;     // this one will hold your shapes
 	vector <string> parameters; // this one will hold parameters for the commands
 
-
+	
 	while (userCommand.compare("exit") != 0) 
 	{
 		try 
 		{
 
-			cout << setprecision(5) << "Enter the command: ";
+			std::cout << setprecision(5) << "Enter the command: ";
 		
 			getline(cin, userCommand);
-			cout << endl;
+			std::cout << endl;
 
 			char* cstr = new char[userCommand.length() + 1];
 
@@ -87,21 +90,24 @@ int main()
 				// The following four lines have a type mismatch error
 				// note that the the parameters vector contains ascii values
 				// HINT: stoi function converts from string to int
-				if(parameters.size() != 5){
-					throw 1;
+				for (int i = 0; i < 500; i++) {
+
+					if(parameters.size() != 5){
+						throw 1;
+					}
+					checkArgs(1,parameters);
+
+					int x = std::stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
+					int y = std::stoi(parameters[2].c_str());
+					int h = std::stoi(parameters[3].c_str());
+					int w = std::stoi(parameters[4].c_str());
+
+
+					Rectangle* r = new Rectangle(x, y, h, w);
+					shapes.push_back(r);
+					std::cout << *r << endl;
 				}
-				checkArgs(1,parameters);
-
-				int x = std::stoi(parameters[1].c_str()); // fix me! also note that x is not previously defined :(
-				int y = std::stoi(parameters[2].c_str());
-				int h = std::stoi(parameters[3].c_str());
-				int w = std::stoi(parameters[4].c_str());
-
-
-				Rectangle* r = new Rectangle(x, y, h, w);
-				shapes.push_back(r);
-				cout << *r << endl;/* instead of this, you may implement operator overloadig and
-										use cout << r which will give you additional points */
+										
 			
 			}
 			else if (command.compare("addS") == 0) {				
@@ -119,7 +125,7 @@ int main()
 					int e = std::stoi(parameters[3].c_str());
 					Square* s = new Square(x, y, e);
 					shapes.push_back(s);
-					cout << *s << endl;
+					std::cout << *s << endl;
 				}
 				
 			}
@@ -136,7 +142,7 @@ int main()
 				int r = std::stoi(parameters[3].c_str());
 				Circle* c = new Circle(x, y, r);
 				shapes.push_back(c);
-				cout << *c << endl;
+				std::cout << *c << endl;
 			
 			}
 			else if (command.compare("scale") == 0) {
@@ -159,7 +165,7 @@ int main()
 				Movable* m = dynamic_cast<Movable*>(shapes[shapeNo - 1]);
 				m->scale(scaleX, scaleY);
 
-				cout << *shapes[shapeNo - 1] << endl;
+				std::cout << *shapes[shapeNo - 1] << endl;
 			}
 			else if (command.compare("move") == 0) {
 				if (parameters.size() != 4) {
@@ -187,7 +193,7 @@ int main()
 				// note that here you should see the corresponding toString output for the derived classes...
 				// if toString is not a virtual function, you may see the base class functionality :(
 			
-				cout << *shapes[shapeNo - 1] << endl;
+				std::cout << *shapes[shapeNo - 1] << endl;
 			}
 			else if (command.compare("display") == 0) {
 				
@@ -196,46 +202,41 @@ int main()
 				}
 				if (shapes.empty()) { throw 7; }
 				checkArgs(6, parameters);
-				Rectangle* r = new Rectangle(10, 10, 10, 10);
-				cout << *r << endl;
+				/*Rectangle* r = new Rectangle(10, 10, 10, 10);
+				cout << *r << endl;*/
 				
 				// this is not given in our example, but why don't you implement a display function which shows all objects stored in shapes?
-				/*if (parameters.size() == 1) {
-					for (int i = 0; i < shapes.size(); i++) {
-						cout << setprecision(1) <<shapes.at(i)->toString();
-					}
+				
+
+
+
+				
+				if (parameters.size() == 1) {
+					transform(shapes.begin(), shapes.end(), shapes.begin(),[](Shape* s) {std::cout << *s << endl;return s;});					
 				}
 				else {
 					if (stoi(parameters[1]) > shapes.size()) {
 						throw 6;
 					}
 					int shapeNo = std::stoi(parameters[1].c_str());
-					cout << shapes.at(shapeNo-1)->toString();
-				}*/
-				
-
-
+					std::cout << shapes.at(shapeNo - 1) << endl;
+				}
 			}
 			else if (command.compare("clear") == 0) {
-				//clear shapes
-				for (int i = 0; i < shapes.size(); i++) {
-					
-					delete shapes[i];
-				
-				}
+				transform(shapes.begin(), shapes.end(), shapes.begin(), [](auto s) {delete s; return nullptr; });
 				shapes.clear();
 			}
 			else if(command.compare("exit")!=0) {
 				throw 0;
 			}
+
+
+
 			
-			
-		
 			parameters.clear();
 			
 			
-			// do any necessary postprocessing at the end of each loop...
-			// yes, there is some necessary postprocessing...
+			
 			cout << endl << endl;
 		}
 		catch(int errorCode){
@@ -245,7 +246,7 @@ int main()
 			}
 			switch (errorCode) {
 			case 0:
-				cout << "Invalid Command:\nAvailable Commands:\n\tAdd Rectangle:\t addR xPosition yPosition Height Width" <<
+				std::cout << "Invalid Command:\nAvailable Commands:\n\tAdd Rectangle:\t addR xPosition yPosition Height Width" <<
 					"\n\tAdd Square: \t addS xPosition yPosition Edge" <<
 					"\n\tAdd Circle: \t addC xPosition yPosition Radius" <<
 					"\n\tMove Shape: \t move shapeIndex newXPosition newYPosition" <<
@@ -254,34 +255,34 @@ int main()
 					"\n\tClear Shapes: \tclear";
 				break;
 			case 1:
-				cout << "Invalid Argument List:\n\tAdd Rectangle:\t addR xPosition yPosition Height Width";
+				std::cout << "Invalid Argument List:\n\tAdd Rectangle:\t addR xPosition yPosition Height Width";
 				break;
 			case 2:
-				cout << "Invalid Argument List:\n\tAdd Square:\t addS xPosition yPosition Edge";
+				std::cout << "Invalid Argument List:\n\tAdd Square:\t addS xPosition yPosition Edge";
 				break;
 			case 3:
-				cout << "Invalid Argument List:\n\tAdd Circle:\t addC xPosition yPosition Radius";
+				std::cout << "Invalid Argument List:\n\tAdd Circle:\t addC xPosition yPosition Radius";
 				break;
 			case 4:
-				cout << "Invalid Arguement List:\n\tMove Shape:\t move shapeIndex newXPosition newYPosition";
+				std::cout << "Invalid Arguement List:\n\tMove Shape:\t move shapeIndex newXPosition newYPosition";
 				break;
 			case 5:
-				cout << "Invalid Argument List:\n\tScale Shape:\t scale shapeIndex scaleX scaleY";
+				std::cout << "Invalid Argument List:\n\tScale Shape:\t scale shapeIndex scaleX scaleY";
 				break;
 			case 6:
-				cout << "Invalid Argument List:\n\tDisplay Shape(s): \t display [shapeIndex]";
+				std::cout << "Invalid Argument List:\n\tDisplay Shape(s): \t display [shapeIndex]";
 				break;
 			case 7:
-				cout << "Cannot Access Shapes, no shapes created.";
+				std::cout << "Cannot Access Shapes, no shapes created.";
 				break;
 			}
-			cout << endl << endl;
+			std::cout << endl << endl;
 
 		}
 		
 	}
 
-	cout << "Press any key to continue...";
+	std::cout << "Press any key to continue...";
 	std::getchar();
 
 	return 0;

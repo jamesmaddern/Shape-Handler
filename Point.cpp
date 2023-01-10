@@ -5,9 +5,3 @@ int Point::getX() {
 int Point::getY() {
 	return _y;
 }
-void Point::setX(int x) {
-	_x = x;
-}
-void Point::setY(int y) {
-	_y = y;
-}

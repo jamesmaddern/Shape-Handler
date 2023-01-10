@@ -5,8 +5,7 @@
 #include <iostream>
 class Shape
 {
-protected:
-	
+protected:	
 	float area;
 	bool isCircular;
 	Point leftTop;
@@ -19,10 +18,7 @@ public:
 	virtual void calculateArea(float, float);
 	virtual void calculatePerimeter(float, float);
 	void calculatePoints(float, float);
-
 	virtual std::ostream& toString(std::ostream&) = 0;
 	friend std::ostream& operator<<(std::ostream&, Shape& obj);
-
-
 };
 

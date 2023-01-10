@@ -4,14 +4,12 @@
 class Square :
     public Shape, public Movable
 {
-private:
-
+private:   
     float edge;
 public:
-	
-	Square(float x, float y, float e);
-	
-	void move(int, int);
+	~Square();
+	Square(float x, float y, float e);	
+	void move(int x, int y);	
 	void scale(float,float);
 	std::ostream& toString(std::ostream&);
 };

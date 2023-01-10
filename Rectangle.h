@@ -10,12 +10,9 @@ private:
     float width;
 public:
     void move(int x, int y);
-    void scale(float,float);
-   
-
+    void scale(float,float);   
 	Rectangle(float x, float y, float h, float w);	
-    std::ostream& toString(std::ostream&);
-    /*friend std::ostream& operator <<(std::ostream& out,  Shape& obj);*/
-     
+    ~Rectangle();
+    std::ostream& toString(std::ostream&);     
 };
 

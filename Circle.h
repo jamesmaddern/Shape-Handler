@@ -9,6 +9,7 @@ private:
     float radius;
 public:
 	Circle(float x, float y, float r);
+	~Circle();
 	void calculateArea(float,float);
 	void calculatePerimeter(float,float);
 	

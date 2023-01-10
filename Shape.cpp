@@ -1,11 +1,12 @@
 #include "Shape.h"
 #include <iostream>
 Shape::Shape(){
+	std::cout << "Shape Created" << std::endl;
 	isCircular = false;
 	
 };
 Shape::~Shape() {
-	
+	std::cout << "Shape Destroyed" << std::endl;
 }
 void Shape::updateShape(float w,float h) {
 	this->calculateArea(w,h);
@@ -31,16 +32,14 @@ void Shape::calculatePoints(float width,float height) {
 		
 	}
 	p2 = new Point((leftTop.getX() + width), (leftTop.getY() + height));
+	
 	points.push_back(p2);
 	if (!this->isCircular) { 
 		p3 = new Point(leftTop.getX(), (leftTop.getY() + height)); 
 		points.push_back(p3);
-		
 	}
-	
-	
-
 }
+//overloaded operator <<
 std::ostream& operator<<(std::ostream& out, Shape& obj) {
 	return obj.toString(out);	
 }

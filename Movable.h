@@ -1,4 +1,5 @@
 #pragma once
+//pure virtual (abstract) class to indicate if a shape is movable
 class Movable
 {
 public:
